@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (context) => AuthCubit()),
       ],
       child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Amazon',
           theme: ThemeData(
             primarySwatch: Colors.blue,
