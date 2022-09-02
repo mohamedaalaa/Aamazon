@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../constants/global_variables.dart';
 import '../../../../constants/sizes.dart';
-import '../../../models/user.dart';
+import '../../../../models/user.dart';
 import '../../../widgets/custom_text_field.dart';
 
 class Login extends StatelessWidget {
@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
         listener: (context, state) {
           switch (state.runtimeType) {
             case LogedUser:
-              goToNamed(homeR, context);
+              goToNamed(navR, context);
               break;
             case AuthError:
               print("an error occured");
@@ -52,10 +52,15 @@ class Login extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      gapH4,
+                      Container(
+                        decoration: const BoxDecoration(
+                            image:
+                                DecorationImage(image: AssetImage(amazonLogo))),
+                      ),
+                      gapH10,
                       CustomTextField(
                         controller: emailController,
                         text: 'Email',

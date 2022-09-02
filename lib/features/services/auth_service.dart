@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:amazon/constants/error_handler.dart';
 import 'package:amazon/constants/global_variables.dart';
-import 'package:amazon/features/models/user.dart';
+import 'package:amazon/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

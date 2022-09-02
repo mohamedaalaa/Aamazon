@@ -1,4 +1,4 @@
-import 'package:amazon/features/models/user.dart';
+import 'package:amazon/models/user.dart';
 import 'package:amazon/features/services/auth_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';

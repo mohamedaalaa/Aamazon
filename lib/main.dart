@@ -1,6 +1,7 @@
+import 'package:amazon/constants/bottom_bar.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/routes.dart';
-import 'package:amazon/features/models/user.dart';
+import 'package:amazon/models/user.dart';
 import 'package:amazon/features/presentation/auth/signup/signup.dart';
 import 'package:amazon/features/presentation/home/home.dart';
 import 'package:amazon/features/services/auth_service.dart';
@@ -59,7 +60,7 @@ class _MyAppState extends State<MyApp> {
               ? const LoadingMainScreen()
               : getUser.token.isEmpty
                   ? const Signup()
-                  : const HomeScreen()),
+                  : const BottomBar()),
     );
   }
 }

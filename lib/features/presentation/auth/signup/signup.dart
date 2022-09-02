@@ -2,7 +2,8 @@ import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/routes.dart';
 import 'package:amazon/constants/sizes.dart';
-import 'package:amazon/features/models/user.dart';
+import 'package:amazon/features/widgets/amazon_logo.dart';
+import 'package:amazon/models/user.dart';
 import 'package:amazon/features/presentation/auth/auth_cubit.dart';
 import 'package:amazon/features/widgets/button.dart';
 
@@ -76,12 +77,9 @@ class _SignupState extends State<Signup> {
               padding: const EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Welcome',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
+                  const AmazonLogo(),
                   gapH10,
                   if (bloc.isSignin)
                     Form(

@@ -1,9 +1,18 @@
 import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/constants/sizes.dart';
-import 'package:amazon/features/models/user.dart';
+import 'package:amazon/models/user.dart';
 import 'package:flutter/material.dart';
 
-String baseUrl = "https://6c1e-197-63-57-21.eu.ngrok.io";
+String baseUrl = "https://e4f6-197-63-16-162.eu.ngrok.io";
+
+//images
+const String amazonLogo = 'assets/images/amazon_in.png';
+const String appliances = 'assets/images/appliances.jpeg';
+const String books = 'assets/images/books.jpeg';
+const String electronics = 'assets/images/electronics.jpeg';
+const String essentials = 'assets/images/essentials.jpeg';
+const String fashion = 'assets/images/fashion.jpeg';
+const String mobiles = 'assets/images/mobiles.jpeg';
 
 class GlobalVariables {
   static const appBarGradient = LinearGradient(
@@ -17,7 +26,7 @@ class GlobalVariables {
   static const secondaryColor = Color.fromRGBO(255, 153, 0, 1);
   static const backgroundColor = Colors.white;
   static const Color greyBackgroundCOlor = Color(0xffebecee);
-  static var selectedNavBarColor = Colors.cyan[800];
+  static var selectedNavBarColor = Colors.cyan;
   static const unselectedNavBarColor = Colors.black87;
 }
 
