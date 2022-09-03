@@ -2,7 +2,7 @@ import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/routes.dart';
 import 'package:amazon/constants/sizes.dart';
-import 'package:amazon/features/widgets/amazon_logo.dart';
+
 import 'package:amazon/models/user.dart';
 import 'package:amazon/features/presentation/auth/auth_cubit.dart';
 import 'package:amazon/features/widgets/button.dart';
@@ -79,7 +79,6 @@ class _SignupState extends State<Signup> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const AmazonLogo(),
                   gapH10,
                   if (bloc.isSignin)
                     Form(

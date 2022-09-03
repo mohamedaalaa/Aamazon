@@ -1,5 +1,5 @@
 import 'package:amazon/constants/global_variables.dart';
-import 'package:amazon/features/presentation/account_screen/cubit/account_screen.dart';
+import 'package:amazon/features/presentation/account_screen/account_screen.dart';
 import 'package:amazon/features/presentation/cart_screen/cart_screen.dart';
 import 'package:amazon/features/presentation/home/home.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,9 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
+        onTap: updatePage,
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
@@ -58,7 +60,7 @@ class _BottomBarState extends State<BottomBar> {
                 Icons.home_outlined,
               ),
             ),
-            label: '',
+            label: 'Home',
           ),
           // ACCOUNT
           BottomNavigationBarItem(
@@ -96,7 +98,7 @@ class _BottomBarState extends State<BottomBar> {
               ),
               child: Badge(
                 elevation: 0,
-                badgeContent: Text('cart'),
+                badgeContent: Text('0'),
                 badgeColor: Colors.white,
                 child: const Icon(
                   Icons.shopping_cart_outlined,

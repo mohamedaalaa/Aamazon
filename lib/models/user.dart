@@ -27,7 +27,7 @@ class UserModel {
         type: json["type"],
         id: json["_id"],
         v: json["__v"].toString(),
-        token: json["token"],
+        token: json["token"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
