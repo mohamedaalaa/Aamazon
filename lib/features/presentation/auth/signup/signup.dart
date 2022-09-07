@@ -47,7 +47,7 @@ class _SignupState extends State<Signup> {
         switch (state.runtimeType) {
           case SignedUser:
             clearTextField();
-            goToNamed(loginR, context);
+            goToPushNamed(loginR, context);
             break;
         }
       },

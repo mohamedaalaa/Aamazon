@@ -1,6 +1,6 @@
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/sizes.dart';
-import 'package:amazon/features/widgets/account_widgets/single_product.dart';
+import 'package:amazon/features/presentation/account_screen/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

@@ -65,5 +65,5 @@ void setUser(UserModel user) {
       v: user.v,
       token: user.token);
 
-  print(_user.token);
+  print(_user.type);
 }

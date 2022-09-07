@@ -27,7 +27,7 @@ class BlowAppBar extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: getUser.name,
+                    text: getUser.email,
                     style: const TextStyle(
                       fontSize: 22,
                       color: Colors.black,

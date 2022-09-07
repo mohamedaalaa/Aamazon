@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
         listener: (context, state) {
           switch (state.runtimeType) {
             case LogedUser:
-              goToNamed(navR, context);
+              goToPushNamed(navR, context);
               break;
             case AuthError:
               print("an error occured");
@@ -99,7 +99,7 @@ class Login extends StatelessWidget {
                           const Text("don't have an account"),
                           gapW4,
                           InkWell(
-                            onTap: () => goToNamed(signupR, context),
+                            onTap: () => goToPushNamed(signupR, context),
                             child: const Text(
                               "Sign-up",
                               style: TextStyle(

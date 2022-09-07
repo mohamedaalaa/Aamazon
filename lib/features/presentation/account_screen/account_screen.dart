@@ -1,9 +1,9 @@
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/sizes.dart';
-import 'package:amazon/features/presentation/orders/orders.dart';
-import 'package:amazon/features/widgets/blow_app_bar.dart';
+import 'package:amazon/features/presentation/account_screen/widgets/top_buttons.dart';
+import 'package:amazon/features/presentation/account_screen/widgets/orders.dart';
+import 'package:amazon/features/presentation/account_screen/widgets/blow_app_bar.dart';
 import 'package:amazon/features/widgets/button.dart';
-import 'package:amazon/features/widgets/account_widgets/top_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

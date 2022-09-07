@@ -1,4 +1,5 @@
 import 'package:amazon/constants/bottom_bar.dart';
+import 'package:amazon/features/presentation/admin_screen/add_product.dart';
 import 'package:amazon/features/presentation/auth/login/login.dart';
 import 'package:amazon/features/presentation/home/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ const String loginR = 'login';
 const String signupR = 'signup';
 const String homeR = 'home';
 const String navR = 'nav';
+const String addProductR = 'apr';
 
 Route<dynamic> generateRout(RouteSettings settings) {
   switch (settings.name) {
@@ -19,6 +21,8 @@ Route<dynamic> generateRout(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => const Signup());
     case navR:
       return MaterialPageRoute(builder: (_) => const BottomBar());
+    case addProductR:
+      return MaterialPageRoute(builder: (_) => const AddProduct());
     default:
       return MaterialPageRoute(builder: (_) => const ErrorWidget());
   }

@@ -1,10 +1,12 @@
+import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/features/widgets/home_widgets/address_box.dart';
+import 'package:amazon/features/widgets/home_widgets/carousel.dart';
+import 'package:amazon/features/widgets/home_widgets/deal_of_day.dart';
 import 'package:amazon/features/widgets/home_widgets/top_categories.dart';
 import 'package:amazon/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import '../../../constants/global_variables.dart';
 import '../../../constants/sizes.dart';
 
@@ -67,9 +69,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [AddressBox(), gapH10, TopCategories()],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const AddressBox(),
+            gapH10,
+            const TopCategories(),
+            CarouselPhotos(
+              images: GlobalVariables.carouselImages,
+              height: context.height * .3,
+            ),
+            gapH10,
+            const DealOfDay(),
+          ],
+        ),
       ),
     );
   }

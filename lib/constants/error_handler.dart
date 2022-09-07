@@ -10,13 +10,13 @@ int errorHandler(
     required String onSuccess}) {
   switch (response.statusCode) {
     case 400:
-      scaffoldMessenger(context, jsonDecode(response.body)['msg']);
+      showScaffold(context, jsonDecode(response.body)['msg']);
       return 400;
     case 500:
-      scaffoldMessenger(context, jsonDecode(response.body)['error']);
+      showScaffold(context, jsonDecode(response.body)['error']);
       return 500;
     default:
-      scaffoldMessenger(context, onSuccess);
+      showScaffold(context, onSuccess);
       return 200;
   }
 }

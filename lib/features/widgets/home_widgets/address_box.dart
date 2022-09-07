@@ -12,7 +12,7 @@ class AddressBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: context.height * .1,
       width: context.width,
       decoration: const BoxDecoration(
         gradient: GlobalVariables.appBarGradient,

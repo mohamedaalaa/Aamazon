@@ -1,11 +1,17 @@
+import 'dart:io';
+
 import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/constants/sizes.dart';
 import 'package:amazon/models/user.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-String baseUrl = "https://8c6a-197-63-55-49.eu.ngrok.io";
+String baseUrl = "https://5d29-197-63-0-217.eu.ngrok.io";
 
-//images
+//images path
 const String amazonLogo = 'assets/images/amazon_in.png';
 const String appliances = 'assets/images/appliances.jpeg';
 const String books = 'assets/images/books.jpeg';
@@ -63,37 +69,106 @@ class GlobalVariables {
   ];
 }
 
+class LoadingUser extends StatelessWidget {
+  const LoadingUser({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            amazonLogo,
+            fit: BoxFit.cover,
+          ),
+          gapH4,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                "Loading...",
+                style: TextStyle(fontSize: 20),
+              ),
+              gapW10,
+              CircularProgressIndicator(
+                value: 2,
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
 InputDecoration inputDecoration(String hint) {
   return InputDecoration(
     hintText: hint,
   );
 }
 
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> scaffoldMessenger(
-    BuildContext context, String text) {
-  return ScaffoldMessenger.of(context)
-      .showSnackBar(SnackBar(content: Text(text)));
+void showScaffold(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
 }
 
-class LoadingMainScreen extends StatelessWidget {
-  const LoadingMainScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: context.width,
-      height: context.height,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: Colors.black,
-        ),
-      ),
-    );
-  }
-}
+void goToPushNamed(String route, BuildContext context) =>
+    Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
 
 void goToNamed(String route, BuildContext context) =>
-    Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
+    Navigator.of(context).pushNamed(
+      route,
+    );
+
+void goToPopNamed(BuildContext context) => Navigator.of(context).pop();
+
+Future<List<File>?> pickMultiImages(BuildContext context) async {
+  try {
+    var result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+    );
+
+    if (result == null) return null;
+
+    List<File> files = result.paths.map((path) => File(path!)).toList();
+    return files;
+  } catch (error) {
+    showScaffold(context, error.toString());
+  }
+  return null;
+}
+
+Future<void> showMyDialog(
+    {required BuildContext context,
+    bool isBarier = false,
+    required String title,
+    required String alert1,
+    required String alert2,
+    required void Function()? onPressed}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: isBarier, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(alert1),
+              Text(alert2),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          ElevatedButton(
+              onPressed: () => goToPopNamed(context),
+              child: const Text("Cancel")),
+          ElevatedButton(
+              onPressed: () => onPressed, child: const Text("Delete")),
+        ],
+      );
+    },
+  );
+}

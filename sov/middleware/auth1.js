@@ -3,7 +3,7 @@
 
 const jwt=require('jsonwebtoken');
 const express = require('express');
- auth1=express.Router();
+auth1=express.Router();
 
 
 

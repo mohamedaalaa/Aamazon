@@ -12,7 +12,7 @@ class TopCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, String>> list = GlobalVariables.categoryImages;
     return SizedBox(
-      height: 70,
+      height: context.width * .2,
       width: context.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

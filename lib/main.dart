@@ -1,6 +1,9 @@
 import 'package:amazon/constants/bottom_bar.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/routes.dart';
+import 'package:amazon/constants/sizes.dart';
+import 'package:amazon/features/presentation/admin_screen/admin_screen.dart';
+import 'package:amazon/features/presentation/admin_screen/cubit/cubit/admin_cubit.dart';
 import 'package:amazon/models/user.dart';
 import 'package:amazon/features/presentation/auth/signup/signup.dart';
 import 'package:amazon/features/presentation/home/home.dart';
@@ -28,13 +31,15 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     AuthService().getUserToken(context).then((value) {
-      // isTokenValid = value;
       if (value) {
         print('value = $value');
         AuthService().getUserData(context).then((value) {
           isLoading = false;
           setState(() {});
         });
+      } else {
+        isLoading = false;
+        setState(() {});
       }
     });
     super.initState();
@@ -45,6 +50,8 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(
+            create: (context) => AdminCubit()..fetchAllProducts(context)),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -57,10 +64,12 @@ class _MyAppState extends State<MyApp> {
           ),
           onGenerateRoute: generateRout,
           home: isLoading
-              ? const LoadingMainScreen()
+              ? const LoadingUser()
               : getUser.token.isEmpty
                   ? const Signup()
-                  : const BottomBar()),
+                  : getUser.type == "admin"
+                      ? const AdminScreen()
+                      : const BottomBar()),
     );
   }
 }

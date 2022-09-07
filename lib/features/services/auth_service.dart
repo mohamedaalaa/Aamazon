@@ -24,7 +24,7 @@ class AuthService {
           onSuccess: 'account created successfully');
       return num == 200 ? UserModel.fromJson(jsonDecode(response.body)) : null;
     } catch (error) {
-      scaffoldMessenger(context, error.toString());
+      showScaffold(context, error.toString());
     }
     return null;
   }
@@ -53,7 +53,7 @@ class AuthService {
       }
       return null;
     } catch (error) {
-      scaffoldMessenger(context, error.toString());
+      showScaffold(context, error.toString());
     }
     return null;
   }
@@ -67,6 +67,7 @@ class AuthService {
   Future<bool> getUserToken(BuildContext context) async {
     try {
       final prefs = await SharedPreferences.getInstance();
+
       String? token = prefs.getString('token');
       print(token);
       if (token == null) prefs.setString('token', '');
@@ -79,7 +80,7 @@ class AuthService {
       print(response);
       return response;
     } catch (error) {
-      scaffoldMessenger(context, error.toString());
+      showScaffold(context, error.toString());
     }
     return false;
   }
@@ -96,7 +97,7 @@ class AuthService {
       UserModel user = UserModel.fromJson(jsonDecode(response.body));
       setUser(user);
     } catch (error) {
-      scaffoldMessenger(context, error.toString());
+      showScaffold(context, error.toString());
     }
   }
 }

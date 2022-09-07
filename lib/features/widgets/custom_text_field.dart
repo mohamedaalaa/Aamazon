@@ -5,15 +5,24 @@ import 'package:flutter/src/widgets/framework.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String text;
+  final int? lines;
+  final TextInputType? inputType;
   final String? Function(String?)? validator;
-  const CustomTextField(
-      {Key? key, required this.controller, required this.text, this.validator})
-      : super(key: key);
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.text,
+    this.validator,
+    this.lines,
+    this.inputType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: inputType ?? TextInputType.text,
       controller: controller,
+      maxLines: lines ?? 1,
       decoration: InputDecoration(
         hintText: text,
         border: const OutlineInputBorder(
