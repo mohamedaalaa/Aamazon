@@ -1,3 +1,5 @@
+import 'package:amazon/models/product.dart';
+
 class UserModel {
   UserModel({
     required this.name,
@@ -8,16 +10,18 @@ class UserModel {
     required this.id,
     required this.v,
     required this.token,
+    required this.cart,
   });
 
-  String name;
-  String email;
-  String password;
-  String address;
-  String type;
-  String id;
-  String v;
-  String token;
+  final String name;
+  final String email;
+  final String password;
+  final String address;
+  final String type;
+  final String id;
+  final String v;
+  final String token;
+  List<dynamic> cart;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         name: json["name"],
@@ -28,6 +32,8 @@ class UserModel {
         id: json["_id"],
         v: json["__v"].toString(),
         token: json["token"] ?? "",
+        cart: List<dynamic>.from(
+            json['cart'].map((x) => Map<String, dynamic>.from(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,19 +44,26 @@ class UserModel {
         "type": type,
         "_id": id,
         "__v": v,
-        "token": token
+        "token": token,
+        'cart': cart
       };
 }
 
+// List<Map<String, dynamic>> get userCarts {
+//   return getUser.cart.from();
+// }
+
 UserModel _user = UserModel(
-    name: '',
-    email: '',
-    password: '',
-    address: '',
-    type: '',
-    id: '',
-    v: '',
-    token: '');
+  name: '',
+  email: '',
+  password: '',
+  address: '',
+  type: '',
+  id: '',
+  v: '',
+  token: '',
+  cart: [],
+);
 
 UserModel get getUser => _user;
 
@@ -63,7 +76,15 @@ void setUser(UserModel user) {
       type: user.type,
       id: user.id,
       v: user.v,
-      token: user.token);
+      token: user.token,
+      cart: user.cart);
 
   print(_user.type);
+  print(_user.cart);
+}
+
+void setUserCart({required List<dynamic> cart}) {
+  _user.cart = cart;
+
+  print(_user.cart);
 }

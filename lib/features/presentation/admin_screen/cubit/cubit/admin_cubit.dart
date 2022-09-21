@@ -4,6 +4,7 @@ import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/features/services/admin_services.dart';
 import 'package:amazon/models/product.dart';
+import 'package:amazon/models/user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
@@ -26,18 +27,34 @@ class AdminCubit extends Cubit<AdminState> {
     'Fashion'
   ];
 
+  List<String> items1 = [
+    'All',
+    'mobiles',
+    'Essentials',
+    'Appliances',
+    'Books',
+    'Fashion'
+  ];
+
   String dropDownValue = "All";
 
   List<File> imageFiles = [];
   List<Product> products = [];
   List<Product> showen = [];
+  List<Product> userList = [];
 
-  void filterList(String? key) {
-    key != null
-        ? showen = products.where((product) => product.category == key).toList()
-        : showen = products;
+  void filterList(String key) {
+    key == "All"
+        ? showen = products
+        : showen =
+            products.where((product) => product.category == key).toList();
+
     emit(FilterList());
   }
+
+  // List<Product> get userList(){
+  //  return products.where((product) => product.category=="").toList();
+  // }
 
   Future pickImages(BuildContext context) async {
     var images = await pickMultiImages(context);
@@ -70,6 +87,15 @@ class AdminCubit extends Cubit<AdminState> {
       }
     } finally {
       emit(GotProducts());
+    }
+  }
+
+  Future<void> deleteProduct(BuildContext context, String? id) async {
+    try {
+      emit(DeleteProduct());
+      await AdminServices().deleteProduct(context, id!);
+    } finally {
+      emit(ProductDeleted());
     }
   }
 }

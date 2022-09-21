@@ -18,3 +18,7 @@ class FetchingProducts extends AdminState {}
 class GotProducts extends AdminState {}
 
 class FilterList extends AdminState {}
+
+class DeleteProduct extends AdminState {}
+
+class ProductDeleted extends AdminState {}

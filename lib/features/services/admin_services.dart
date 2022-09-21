@@ -34,7 +34,8 @@ class AdminServices {
         images: imageUrls,
         quantity: quantity,
         price: price,
-        category: category);
+        category: category,
+        id: '');
     try {
       var response = await http.post(
         url,
@@ -63,9 +64,9 @@ class AdminServices {
 
   //fetch all produsts
   Future<List<Product>?> fetchAllProducts(BuildContext context) async {
-    var url = Uri.parse("$baseUrl/admin/get-product");
-
     try {
+      var url = Uri.parse("$baseUrl/admin/get-product");
+
       var response = await http.get(
         url,
         headers: {
@@ -74,6 +75,7 @@ class AdminServices {
         },
       );
       var products = jsonDecode(response.body);
+      print(products);
       List<Product>? allProducts;
       allProducts = List<Product>.from(products.map((x) => Product.fromMap(x)));
       return allProducts;
@@ -81,5 +83,22 @@ class AdminServices {
       showScaffold(context, error.toString());
     }
     return null;
+  }
+
+  Future deleteProduct(BuildContext context, String id) async {
+    var url = Uri.parse("$baseUrl/admin/delete-product");
+    try {
+      await http.post(
+        url,
+        body: jsonEncode({'id': id}),
+        headers: {
+          'Content-Type': 'application/json',
+          'token': getUser.token,
+        },
+      );
+      return;
+    } catch (error) {
+      showScaffold(context, error.toString());
+    }
   }
 }

@@ -10,10 +10,16 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   bool isSignin = true;
+  bool isAdmin = true;
   var regex = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
   bool? isTokenValid;
+
+  void toggle() {
+    isAdmin = !isAdmin;
+    emit(ToggleState());
+  }
 
   void toggleSignin() {
     isSignin = !isSignin;

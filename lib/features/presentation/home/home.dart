@@ -1,8 +1,9 @@
 import 'package:amazon/constants/device_size.dart';
-import 'package:amazon/features/widgets/home_widgets/address_box.dart';
-import 'package:amazon/features/widgets/home_widgets/carousel.dart';
-import 'package:amazon/features/widgets/home_widgets/deal_of_day.dart';
-import 'package:amazon/features/widgets/home_widgets/top_categories.dart';
+import 'package:amazon/features/presentation/home/widgets/address_box.dart';
+import 'package:amazon/features/presentation/home/widgets/carousel.dart';
+import 'package:amazon/features/presentation/home/widgets/deal_of_day.dart';
+import 'package:amazon/features/presentation/home/widgets/top_categories.dart';
+import 'package:amazon/features/presentation/search/search_screen.dart';
 import 'package:amazon/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -36,29 +37,34 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(left: 10, right: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black12, width: 1),
-                      borderRadius: BorderRadius.circular(5)),
-                  height: 42,
-                  child: TextFormField(
-                    controller: searchController,
-                    decoration: const InputDecoration(
-                      hoverColor: Colors.black,
-                      border: InputBorder.none,
-                      hintText: 'Search',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.black,
-                        ),
-                      ),
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black12, width: 1),
+                        borderRadius: BorderRadius.circular(5)),
+                    height: 42,
+                    child: IconButton(
+                        onPressed: () => showSearch(
+                            context: context, delegate: SearchScreen()),
+                        icon: const Icon(Icons.search))
+                    // TextFormField(
+                    //   onChanged: (value) => showSearch(context: context, delegate: Sear),
+                    //   controller: searchController,
+                    //   decoration: const InputDecoration(
+                    //     hoverColor: Colors.black,
+                    //     border: InputBorder.none,
+                    //     hintText: 'Search',
+                    //     hintStyle: TextStyle(color: Colors.grey),
+                    //     prefixIcon: Padding(
+                    //       padding: EdgeInsets.only(left: 10, right: 10),
+                    //       child: Icon(
+                    //         Icons.search,
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     ),
-                  ),
-                ),
               ),
               IconButton(onPressed: () {}, icon: const Icon(Icons.mic))
             ],

@@ -5,7 +5,7 @@ import 'package:amazon/features/presentation/auth/auth_cubit.dart';
 import 'package:amazon/features/widgets/app_bar.dart';
 import 'package:amazon/features/widgets/button.dart';
 import 'package:amazon/features/widgets/custom_text_field.dart';
-import 'package:amazon/features/widgets/home_widgets/carousel.dart';
+import 'package:amazon/features/presentation/home/widgets/carousel.dart';
 import 'package:amazon/features/widgets/loading.dart';
 import 'package:amazon/models/product.dart';
 import 'package:dotted_border/dotted_border.dart';

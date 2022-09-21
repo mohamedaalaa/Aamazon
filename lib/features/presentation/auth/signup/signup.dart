@@ -62,10 +62,11 @@ class _SignupState extends State<Signup> {
                 email: emailController.text,
                 password: passwordController.text,
                 address: '',
-                type: '',
+                type: "user",
                 id: '',
                 v: '',
-                token: '');
+                token: '',
+                cart: []);
             bloc.signupUser(user, context);
           }
         }
@@ -87,6 +88,27 @@ class _SignupState extends State<Signup> {
                           color: Colors.white,
                           child: Column(
                             children: [
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: bloc.isSignin,
+                                    onChanged: (value) => bloc.toggle(),
+                                  ),
+                                  gapW4,
+                                  const Text("user")
+                                ],
+                              ),
+                              gapH4,
+                              Row(
+                                children: [
+                                  Checkbox(
+                                    value: !bloc.isSignin,
+                                    onChanged: (value) => bloc.toggle(),
+                                  ),
+                                  gapW4,
+                                  const Text("admin")
+                                ],
+                              ),
                               gapH10,
                               CustomTextField(
                                 controller: nameController,

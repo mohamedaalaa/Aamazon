@@ -1,6 +1,7 @@
 
 
 const mongoose=require('mongoose');
+const ratingSchema = require('./rate');
 
 
 const productSchema = mongoose.Schema({
@@ -32,10 +33,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-    
+  rating:[ratingSchema]    
 })
 
 
 
 const Product = mongoose.model("Product",productSchema);
-module.exports= Product;
+module.exports= {Product,productSchema};

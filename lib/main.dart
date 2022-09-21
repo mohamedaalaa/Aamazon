@@ -4,6 +4,9 @@ import 'package:amazon/constants/routes.dart';
 import 'package:amazon/constants/sizes.dart';
 import 'package:amazon/features/presentation/admin_screen/admin_screen.dart';
 import 'package:amazon/features/presentation/admin_screen/cubit/cubit/admin_cubit.dart';
+import 'package:amazon/features/presentation/cart_screen/cubit/cart_cubit.dart';
+import 'package:amazon/features/presentation/home/cubit/home_cubit.dart';
+// import 'package:amazon/features/presentation/search/cubit/cubit/product_cubit.dart';
 import 'package:amazon/models/user.dart';
 import 'package:amazon/features/presentation/auth/signup/signup.dart';
 import 'package:amazon/features/presentation/home/home.dart';
@@ -50,6 +53,8 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => CartCubit()),
+        BlocProvider(create: (context) => HomeCubit()..dealOfTheDay(context)),
         BlocProvider(
             create: (context) => AdminCubit()..fetchAllProducts(context)),
       ],

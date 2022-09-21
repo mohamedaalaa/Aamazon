@@ -2,6 +2,7 @@ import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/features/presentation/account_screen/account_screen.dart';
 import 'package:amazon/features/presentation/cart_screen/cart_screen.dart';
 import 'package:amazon/features/presentation/home/home.dart';
+import 'package:amazon/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -18,11 +19,12 @@ class _BottomBarState extends State<BottomBar> {
   int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
+  int cartLength = getUser.cart.isEmpty ? 0 : getUser.cart.length;
 
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const CartScreen(),
+    CartScreen(),
   ];
 
   void updatePage(int page) {
@@ -98,8 +100,11 @@ class _BottomBarState extends State<BottomBar> {
               ),
               child: Badge(
                 elevation: 0,
-                badgeContent: Text('0'),
-                badgeColor: Colors.white,
+                badgeContent: Text(
+                  '$cartLength',
+                  style: const TextStyle(color: Colors.white),
+                ),
+                badgeColor: Colors.blueAccent,
                 child: const Icon(
                   Icons.shopping_cart_outlined,
                 ),

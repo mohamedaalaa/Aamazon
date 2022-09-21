@@ -2,14 +2,16 @@ import 'dart:io';
 
 import 'package:amazon/constants/device_size.dart';
 import 'package:amazon/constants/sizes.dart';
+import 'package:amazon/features/presentation/admin_screen/cubit/cubit/admin_cubit.dart';
 import 'package:amazon/models/user.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-String baseUrl = "https://5d29-197-63-0-217.eu.ngrok.io";
+String baseUrl = "https://35e3-197-63-83-79.eu.ngrok.io";
 
 //images path
 const String amazonLogo = 'assets/images/amazon_in.png';
@@ -47,7 +49,7 @@ class GlobalVariables {
 
   static const List<Map<String, String>> categoryImages = [
     {
-      'title': 'Mobiles',
+      'title': 'mobiles',
       'image': 'assets/images/mobiles.jpeg',
     },
     {
@@ -122,6 +124,9 @@ void goToNamed(String route, BuildContext context) =>
       route,
     );
 
+void goToArgumentsNamed(String route, BuildContext context, String category) =>
+    Navigator.of(context).pushNamed(route, arguments: category);
+
 void goToPopNamed(BuildContext context) => Navigator.of(context).pop();
 
 Future<List<File>?> pickMultiImages(BuildContext context) async {
@@ -140,16 +145,17 @@ Future<List<File>?> pickMultiImages(BuildContext context) async {
   return null;
 }
 
-Future<void> showMyDialog(
-    {required BuildContext context,
-    bool isBarier = false,
-    required String title,
-    required String alert1,
-    required String alert2,
-    required void Function()? onPressed}) async {
+Future<void> showMyDialog({
+  required BuildContext context,
+  bool isBarier = false,
+  required String title,
+  required String alert1,
+  required String alert2,
+  required String id,
+}) async {
   return showDialog<void>(
     context: context,
-    barrierDismissible: isBarier, // user must tap button!
+    barrierDismissible: isBarier, // user must ap button!
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(title),
@@ -165,8 +171,22 @@ Future<void> showMyDialog(
           ElevatedButton(
               onPressed: () => goToPopNamed(context),
               child: const Text("Cancel")),
-          ElevatedButton(
-              onPressed: () => onPressed, child: const Text("Delete")),
+          BlocBuilder<AdminCubit, AdminState>(
+            builder: (context, state) {
+              final bloc = BlocProvider.of<AdminCubit>(context);
+              switch (state.runtimeType) {
+                case DeleteProduct:
+                  return const CircularProgressIndicator();
+                default:
+                  return ElevatedButton(
+                    onPressed: () {
+                      bloc.deleteProduct(context, id);
+                    },
+                    child: const Text("Delete"),
+                  );
+              }
+            },
+          ),
         ],
       );
     },
